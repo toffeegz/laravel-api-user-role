@@ -19,12 +19,16 @@ class UserController extends Controller
         $users = User::all();
         foreach($users as $user)
         {
+            $role = null;
+            if($user->role) {
+                $role = $user->role;
+            }
             $data[] = [
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
                 'role_id' => $user->role_id,
-                'role_name' => $user->role->name,
+                'role' => $role,
             ];
         }
         return response()->json($data);
